@@ -8,9 +8,9 @@ deleteCustomerById =(id) => userModel.remove({_id : id});
 findCustomerById =(id)=> userModel.find({$and : [{type : 'CUSTOMER'} , {_id : id}] });
 updateCustomer = (uid , user ) => userModel.update({_id: uid}, {$set: user});
 
-findAllBrewers =()=> userModel.find({type : 'CUSTOMER'});
+findAllBrewers =()=> userModel.find({type : 'BREWER'});
 deleteBrewerById =(id) => userModel.remove({_id : id});
-findBrewerById =(id)=> userModel.find({$and : [{type : 'CUSTOMER'} , {_id : id}] });
+findBrewerById =(id)=> userModel.find({$and : [{type : 'BREWER'} , {_id : id}] });
 updateBrewer = (uid , user ) => userModel.update({_id: uid}, {$set: user});
 
 module.exports = {
