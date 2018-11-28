@@ -1,4 +1,4 @@
-const userModel = require('../models/user.model.server');
+const userModel = require('../model/user.model.server');
 
 createUser = user => userModel.create(user);
 findAllUsers = ()=> userModel.find();
