@@ -9,4 +9,4 @@ app.use(bodyParser.urlencoded({extended : true}));
 require ('./db/database')();
 
 //Listen to requests at port 3000
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
