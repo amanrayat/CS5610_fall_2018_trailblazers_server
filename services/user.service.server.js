@@ -45,11 +45,22 @@ module.exports = app =>{
     getSession = (req, res) => res.send(req.session['currentUser']);
 
     login = (req ,res ) =>{
-
+        userDao.findUserByCredentials(req.body.username , req.body.password).then(result=>{
+            req.session['currentUser'] = result;
+            res.send(result);
+        })
     };
-    
+
+    addfollower =(req ,res )=>{
+        userDao.addFollowerById(req.params['uId'] , req.body).then(result=>{
+            res.send(result)
+        })
+    };
+
     app.post('/api/register', setSession);
     app.get('/api/profile', getSession);
+    app.get('/api/login', login);
+    app.post('/api/user/:uId/follow', addfollower);
     app.get('/api/customer' , getCustomer);
     app.get('/api/customer/:cid' , getCustomerById);
     app.get('/api/brewer' , getBrewer);
