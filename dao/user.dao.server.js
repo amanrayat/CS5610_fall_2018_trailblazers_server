@@ -13,6 +13,9 @@ deleteBrewerById =(id) => userModel.remove({_id : id});
 findBrewerById =(id)=> userModel.find({$and : [{type : 'BREWER'} , {_id : id}] });
 updateBrewer = (uid , user ) => userModel.update({_id: uid}, {$set: user});
 
+register =() =>{}
+login =() => { }
+
 module.exports = {
     createUser,
     findAllBrewers,
@@ -23,5 +26,7 @@ module.exports = {
     findCustomerById,
     deleteCustomerById,
     updateCustomer,
-    findAllUsers
+    findAllUsers,
+    register,
+    login
 };

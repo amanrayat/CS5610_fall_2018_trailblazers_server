@@ -30,6 +30,26 @@ module.exports = app =>{
         });
     };
 
+    setSession = (req, res) => {
+
+        userDao.createUser({
+            _id : Date.now(),
+            firstName: req.body.firstName,
+            password : req.body.password
+        }).then(result=>{
+            req.session['currentUser'] = result;
+            res.send(req.session);
+        })
+    };
+
+    getSession = (req, res) => res.send(req.session['currentUser']);
+
+    login = (req ,res ) =>{
+
+    };
+    
+    app.post('/api/register', setSession);
+    app.get('/api/profile', getSession);
     app.get('/api/customer' , getCustomer);
     app.get('/api/customer/:cid' , getCustomerById);
     app.get('/api/brewer' , getBrewer);
