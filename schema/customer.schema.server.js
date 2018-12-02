@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 const customerSchema = mongoose.Schema({
-    following : []
+    _id : Number,
+    cId : {type : Number , ref : 'commentModel'}
 });
 
 module.exports = customerSchema;

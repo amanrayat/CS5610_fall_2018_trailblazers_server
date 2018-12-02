@@ -1,11 +1,7 @@
 const userModel = require('../model/user.model.server');
 
 createUser = user => userModel.create(user);
-findAllUsers = ()=> userModel.find().populate('cId').
-exec(function (err, story) {
-    console.log('The author is %s', story);
-    // prints "The author is Ian Fleming"
-});
+findAllUsers = ()=> userModel.find().populate('customer.cId').exec();
 findUserById =(id)=> userModel.find({$and : [ {_id : id}] });
 
 findUserByCredentials =(uId , password)=>userModel.find({username : uId , password : password});

@@ -60,11 +60,11 @@ module.exports = app =>{
         })
     };
 
-    getUser =(req,res)=>{
+    getUser =(req ,res)=>{
         userDao.findAllUsers().then(result=>{
             res.send(result)
         })
-    }
+    };
 
     app.post('/api/comment', addComment);
     app.post('/api/register', register);
