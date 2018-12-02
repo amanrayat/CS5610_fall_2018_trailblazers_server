@@ -11,7 +11,7 @@ const userSchema = mongoose.Schema({
     type : {type: String , enum : ['CUSTOMER' , 'BREWER']},
     customer : CustomerSchema,
     brewer : BrewerSchema,
-    following : []
+    cId : {type : Number , ref : 'commentModel'}
 }, {collection: 'user'});
 
 module.exports = userSchema;

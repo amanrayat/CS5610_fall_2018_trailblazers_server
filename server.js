@@ -6,6 +6,8 @@ const idleTimeoutSeconds = 30*60*1000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
 
+
+
 //Database Connection
 require ('./db/database')();
 

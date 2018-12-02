@@ -1,7 +1,11 @@
 const userModel = require('../model/user.model.server');
 
 createUser = user => userModel.create(user);
-findAllUsers = ()=> userModel.find();
+findAllUsers = ()=> userModel.find().populate('cId').
+exec(function (err, story) {
+    console.log('The author is %s', story);
+    // prints "The author is Ian Fleming"
+});
 findUserById =(id)=> userModel.find({$and : [ {_id : id}] });
 
 findUserByCredentials =(uId , password)=>userModel.find({username : uId , password : password});
@@ -17,7 +21,7 @@ findBrewerById =(id)=> userModel.find({$and : [{type : 'BREWER'} , {_id : id}] }
 updateBrewer = (uid , user ) => userModel.update({_id: uid}, {$set: user});
 
 addFollowerById = (uId ,followee) => {
-    return userModel.updateOne({_id : uId} , {$push : {following : followee} })
+    return userModel.updateOne({_id : uId} , {$push : {'customer.following' : followee} })
 };
 
 

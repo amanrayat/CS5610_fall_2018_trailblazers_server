@@ -1,4 +1,5 @@
 const userDao = require('../dao/user.dao.server');
+const commentModel = require('../model/comment.model.server');
 
 module.exports = app =>{
 
@@ -30,13 +31,9 @@ module.exports = app =>{
         });
     };
 
-    setSession = (req, res) => {
+    register = (req, res) => {
 
-        userDao.createUser({
-            _id : Date.now(),
-            firstName: req.body.firstName,
-            password : req.body.password
-        }).then(result=>{
+        userDao.createUser(req.body).then(result=>{
             req.session['currentUser'] = result;
             res.send(req.session);
         })
@@ -57,11 +54,25 @@ module.exports = app =>{
         })
     };
 
-    app.post('/api/register', setSession);
+    addComment = (req , res )=>{
+        commentModel.create(req.body).then(result=>{
+            res.send(result)
+        })
+    };
+
+    getUser =(req,res)=>{
+        userDao.findAllUsers().then(result=>{
+            res.send(result)
+        })
+    }
+
+    app.post('/api/comment', addComment);
+    app.post('/api/register', register);
     app.get('/api/profile', getSession);
     app.get('/api/login', login);
     app.post('/api/user/:uId/follow', addfollower);
     app.get('/api/customer' , getCustomer);
+    app.get('/api/user' , getUser);
     app.get('/api/customer/:cid' , getCustomerById);
     app.get('/api/brewer' , getBrewer);
     app.get('/api/brewer/bid' , getBrewerById);
