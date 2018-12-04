@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
-const commentSchema = mongoose.Schema({
+const feedbackSchema = mongoose.Schema({
     _id : Number,
     comment : String,
+    favorite : Boolean,
     uId : {type : Number , ref : 'UserModel'},
     bId : {type:  Number , ref : 'BeerModal'}
-} , {collection : 'comment'});
+} , {collection : 'feedback'});
 
-module.exports = commentSchema;
+module.exports = feedbackSchema;

@@ -1,5 +1,4 @@
 const userDao = require('../dao/user.dao.server');
-const commentModel = require('../model/comment.model.server');
 
 module.exports = app =>{
 
@@ -39,7 +38,7 @@ module.exports = app =>{
         })
     };
 
-    getSession = (req, res) => res.send(req.session['currentUser']);
+    profile = (req, res) => res.send(req.session['currentUser']);
 
     login = (req ,res ) =>{
         userDao.findUserByCredentials(req.body.username , req.body.password).then(result=>{
@@ -54,21 +53,14 @@ module.exports = app =>{
         })
     };
 
-    addComment = (req , res )=>{
-        commentModel.create(req.body).then(result=>{
-            res.send(result)
-        })
-    };
-
     getUser =(req ,res)=>{
         userDao.findAllUsers().then(result=>{
             res.send(result)
         })
     };
 
-    app.post('/api/comment', addComment);
     app.post('/api/register', register);
-    app.get('/api/profile', getSession);
+    app.get('/api/profile', profile);
     app.get('/api/login', login);
     app.post('/api/user/:uId/follow', addfollower);
     app.get('/api/customer' , getCustomer);
