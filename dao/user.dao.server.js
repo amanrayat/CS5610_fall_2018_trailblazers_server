@@ -11,28 +11,24 @@ deleteCustomerById =(id) => userModel.remove({_id : id});
 findCustomerById =(id)=> userModel.find({$and : [{type : 'CUSTOMER'} , {_id : id}] });
 updateCustomer = (uid , user ) => userModel.update({_id: uid}, {$set: user});
 
-findAllBrewers =()=> userModel.find({type : 'BREWER'});
-deleteBrewerById =(id) => userModel.remove({_id : id});
-findBrewerById =(id)=> userModel.find({$and : [{type : 'BREWER'} , {_id : id}] });
-updateBrewer = (uid , user ) => userModel.update({_id: uid}, {$set: user});
+findAllEventPlanners =()=> userModel.find({type : 'EVENTPLANNER'});
+deleteEventPlannerById =(id) => userModel.remove({_id : id});
+findEventPlannerById =(id)=> userModel.find({$and : [{type : 'EVENTPLANNER'} , {_id : id}] });
+updateEventPlanner = (uid , user ) => userModel.update({_id: uid}, {$set: user});
 
-addFollowerById = (uId ,followee) => {
-    return userModel.updateOne({_id : uId} , {$push : {'customer.following' : followee} })
-};
 
 
 module.exports = {
     createUser,
-    findAllBrewers,
     findUserById,
-    findBrewerById,
     findUserByCredentials,
-    deleteBrewerById,
-    updateBrewer,
-    addFollowerById,
     findAllCustomers,
     findCustomerById,
     deleteCustomerById,
     updateCustomer,
     findAllUsers,
+    findAllEventPlanners,
+    deleteEventPlannerById,
+    findEventPlannerById,
+    updateEventPlanner
 };
