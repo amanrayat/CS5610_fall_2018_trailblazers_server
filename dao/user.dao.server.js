@@ -3,6 +3,8 @@ const userModel = require('../model/user.model.server');
 createUser = user => userModel.create(user);
 findAllUsers = ()=> userModel.find().populate('customer.cId').exec();
 findUserById =(id)=> userModel.find({$and : [ {_id : id}] });
+deleteUserById =(id) => userModel.remove({_id : id});
+updateUserById = (uid , user ) => userModel.update({_id: uid}, {$set: user});
 
 findUserByCredentials =(uId , password)=>userModel.find({username : uId , password : password});
 
@@ -19,6 +21,8 @@ updateEventPlanner = (uid , user ) => userModel.update({_id: uid}, {$set: user})
 
 
 module.exports = {
+    updateUserById,
+    deleteUserById,
     createUser,
     findUserById,
     findUserByCredentials,

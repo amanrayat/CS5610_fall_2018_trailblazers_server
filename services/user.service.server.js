@@ -42,11 +42,24 @@ module.exports = app =>{
         })
     };
 
+    deleteUserById = (req , res) =>
+        userDao.deleteUserById(req.params['userId']).then(result=>{
+            res.send(result)
+        });
+
+    updateUserById = (req , res ) =>{
+        userDao.updateUserById(req.params['userId'] , req.body).then(result=>{
+            res.send(result)
+        })
+    };
+
     app.post('/api/register', register);
     app.get('/api/profile', profile);
     app.get('/api/login', login);
     app.get('/api/customer' , getCustomer);
     app.get('/api/user' , getUser);
     app.get('/api/customer/:cid' , getCustomerById);
+    app.delete('/api/user/:userId' , deleteUserById);
+    app.put('/api/user/:userId' , updateUserById);
     app.post('/api/customer' , createUser);
 };
