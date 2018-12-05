@@ -20,6 +20,7 @@ app.use(session({
     rolling: true
 }));
 require('./services/user.service.server')(app);
+require('./services/userFollowers.service.server')(app);
 
 //Listen to requests at port 3000
 app.listen(process.env.PORT || 3000);
