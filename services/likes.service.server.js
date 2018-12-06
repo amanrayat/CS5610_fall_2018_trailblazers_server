@@ -46,6 +46,12 @@ module.exports = app => {
         })
     };
 
+    getMyRecentLikes = (req,res)=>{
+        likeDao.recentLikeByFollowing(req.params['userId']).then(result=>{
+            res.send(result)
+        })
+    };
+
     app.get('/api/beer/:beerId/like' , getAllLikesOnBeer);
     app.post('/api/user/:userId/beer/:beerId/like' , addlike);
     app.put('/api/beer/:beerId/like' , updateLike);
@@ -54,4 +60,6 @@ module.exports = app => {
     app.get('/api/user/:userId/like' , getAllLikesByUserId);
     app.get('/api/like' , getAllLikes);
     app.get('/api/recentlike' , recentLikes);
+    app.get('/api/user/:userId/recentlikes' , getMyRecentLikes);
+
 };

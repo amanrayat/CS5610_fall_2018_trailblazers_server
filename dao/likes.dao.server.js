@@ -36,5 +36,6 @@ module.exports = {
     removeLike,
     findAllMyLikeOnBeerId,
     updateLike,
-    recentLikes
+    recentLikes,
+    recentLikeByFollowing
 };
