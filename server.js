@@ -20,6 +20,7 @@ app.use(session({
     rolling: true
 }));
 
+require('./services/likes.service.server')(app);
 require('./services/beer.service.server')(app);
 require('./services/user.service.server')(app);
 require('./services/userFollowers.service.server')(app);

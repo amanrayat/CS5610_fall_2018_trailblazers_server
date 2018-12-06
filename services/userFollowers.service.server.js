@@ -1,6 +1,5 @@
 const followerDao = require ('../dao/userFollower.dao.server');
 
-
 module.exports = app =>{
 
     findAllFollowers = ( req , res ) =>{
@@ -25,6 +24,7 @@ module.exports = app =>{
             res.send(result)
         })
     };
+
     RemoveFollowUser = ( req ,res ) =>{
         followerDao.RemoveFollowUser(req.params['userId'] , req.params['followerId']).then((result )=>{
             res.send(result)
