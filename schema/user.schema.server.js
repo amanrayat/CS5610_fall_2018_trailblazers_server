@@ -12,9 +12,7 @@ const userSchema = mongoose.Schema({
     email : String,
     phoneNo : Number,
     type : {type: String , enum : ['CUSTOMER' , 'EVENTPLANNER' , 'ADMIN']},
-    customer : CustomerSchema,
-    eventPlanner : PlannerSchema,
-    admin : AdminSchema
+    admin : {type: Number, ref: 'user'}
 }, {collection: 'user'});
 
 module.exports = userSchema;

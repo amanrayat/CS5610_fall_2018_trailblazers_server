@@ -20,6 +20,16 @@ app.use(session({
     rolling: true
 }));
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header("Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header("Access-Control-Allow-Methods",
+        "GET, POST, PUT, DELETE, OPTIONS");
+    next();
+});
+
 require('./services/likes.service.server')(app);
 require('./services/beer.service.server')(app);
 require('./services/user.service.server')(app);
@@ -27,4 +37,4 @@ require('./services/userFollowers.service.server')(app);
 require('./services/comment.service.server')(app);
 
 //Listen to requests at port 3000
-app.listen(process.env.PORT || 3000);
+app.listen(4000);
