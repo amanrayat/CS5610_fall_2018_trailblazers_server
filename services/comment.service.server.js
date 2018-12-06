@@ -41,11 +41,25 @@ module.exports = app => {
         })
     };
 
+    recentComments = (req,res) =>{
+        commentDao.recentComments().then(result=>{
+            res.send(result.slice(0,6))
+        })
+    };
+
+    getMyRecentComment = (req ,res ) =>{
+        commentDao.recentCommentByFollowing(req.params['userId']).then(result=>{
+            res.send(result)
+        })
+    }
+
     app.get('/api/beer/:beerId/comment' , getAllCommentsOnBeer);
     app.post('/api/user/:userId/beer/:beerId/comment' , addcomment);
     app.put('/api/beer/:beerId/comment' , updateComment);
     app.delete('/api/beer/:beerId/comment/:commentId' , deleteComment);
     app.get('/api/user/:userId/beer/:beerId/comment' , getCommentOnBeerByUserId);
     app.get('/api/user/:userId/comment' , getAllCommentsByUserId);
+    app.get('/api/user/:userId/recentcomment' , getMyRecentComment);
     app.get('/api/comment' , getAllComments);
+    app.get('/api/recentcomment' , recentComments);
 };

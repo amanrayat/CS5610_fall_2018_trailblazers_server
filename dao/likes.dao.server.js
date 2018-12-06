@@ -1,4 +1,5 @@
 const likesModel = require ('../model/likes.model.server');
+const userFollowerDao = require ('../dao/userFollower.dao.server');
 
 
 findAllLikes = () => likesModel.find().populate('userId beerId').exec();
@@ -11,6 +12,21 @@ likesOnBeer = (userId , beerId ,likes) =>
 
 removeLike = (lId) => likesModel.remove({_id : lId});
 updateLike = (lId , newLike) => likesModel.update({_id: lId}, {$set: newLike});
+recentLikes = () => likesModel.find({}).sort('-time').exec();
+recentLikeByFollowing = (id) =>{
+    return likesModel.find().populate('userId followerId').exec().then(result=>{
+        return userFollowerDao.findAllMyFollowingId(id).then(result2=>{
+            let ans =[];
+            const followersId = result2.map(x=>x.followerId);
+            result.map(x=>{
+                if(followersId.includes(x.userId._id)){
+                    ans.push(x)
+                }
+            });
+            return ans
+        })
+    })
+};
 
 module.exports = {
     findAllLikes,
@@ -19,5 +35,6 @@ module.exports = {
     likesOnBeer,
     removeLike,
     findAllMyLikeOnBeerId,
-    updateLike
+    updateLike,
+    recentLikes
 };

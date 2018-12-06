@@ -40,6 +40,12 @@ module.exports = app => {
         })
     };
 
+    recentLikes = (req,res) =>{
+        likeDao.recentLikes().then(result=>{
+            res.send(result.slice(0,6))
+        })
+    };
+
     app.get('/api/beer/:beerId/like' , getAllLikesOnBeer);
     app.post('/api/user/:userId/beer/:beerId/like' , addlike);
     app.put('/api/beer/:beerId/like' , updateLike);
@@ -47,4 +53,5 @@ module.exports = app => {
     app.get('/api/user/:userId/beer/:beerId/like' , getLikeOnBeerByUserId);
     app.get('/api/user/:userId/like' , getAllLikesByUserId);
     app.get('/api/like' , getAllLikes);
+    app.get('/api/recentlike' , recentLikes);
 };

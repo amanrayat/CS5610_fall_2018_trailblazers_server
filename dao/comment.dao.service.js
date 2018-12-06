@@ -1,4 +1,5 @@
 const commentModel = require ('../model/comment.model.server');
+const userFollowerDao = require ('../dao/userFollower.dao.server');
 
 
 findAllComments = () => commentModel.find().populate('userId beerId').exec();
@@ -11,6 +12,21 @@ commentOnBeer = (userId , beerId ,comment) =>
 
 removeComment = (cId) => commentModel.remove({_id : cId});
 updateComment = (cId , newComment) => commentModel.update({_id: cId}, {$set: newComment});
+recentComments = () => commentModel.find({}).sort('-time').exec();
+recentCommentByFollowing = (id) =>{
+    return commentModel.find().populate('userId').exec().then(result=>{
+        return userFollowerDao.findAllMyFollowingId(id).then(result2=>{
+            let ans =[];
+            const followersId = result2.map(x=>x.followerId);
+            result.map(x=>{
+                if(followersId.includes(x.userId._id)){
+                    ans.push(x)
+                }
+            });
+            return ans
+        })
+    })
+};
 
 module.exports = {
     findAllComments,
@@ -19,5 +35,7 @@ module.exports = {
     commentOnBeer,
     removeComment,
     findAllMyCommentOnBeerId,
-    updateComment
+    updateComment,
+    recentComments,
+    recentCommentByFollowing
 };
