@@ -1,4 +1,4 @@
-# Logs
+git sgit# Logs
 logs
 *.log
 npm-debug.log*
@@ -59,3 +59,7 @@ typings/
 
 # next.js build output
 .next
+
+*/.idea
+../.idea/
+.idea/
