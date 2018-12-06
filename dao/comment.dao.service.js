@@ -7,7 +7,7 @@ findAllCommentsOnBeerId = id => commentModel.find({beerId : id}).populate('userI
 findAllMyCommentOnBeerId =(uId ,bId) => commentModel.find({userId : uId , beerId : bId}).populate('userId beerId').exec();
 
 commentOnBeer = (userId , beerId ,comment) =>
-    commentModel.create({userId : userId , beerId : beerId , comment : comment});
+    commentModel.create({userId : userId , beerId : beerId , comment : comment.comment});
 
 removeComment = (cId) => commentModel.remove({_id : cId});
 updateComment = (cId , newComment) => commentModel.update({_id: cId}, {$set: newComment});

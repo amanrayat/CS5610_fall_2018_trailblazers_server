@@ -1,15 +1,9 @@
 const commentDao = require('../dao/comment.dao.service');
 
 module.exports = app => {
-    app.get('/api/beer/:beerId/comment' , getAllCommenstOnBeer);
-    app.post('/api/user/:userId/beer/:beerId/comment' , addcomment);
-    app.put('/api/beer/:beerId/comment' , updateComment);
-    app.delete('/api/beer/:beerId/comment/:commentId' , deleteComment);
-    app.get('/api/user/:userId/beer/:beerId/comment' , getCommentOnBeerByUserId);
-    app.get('/api/user/:userId/comment' , getAllCommentsByUserId);
-    app.get('/api/comment' , getAllComments);
 
-    getAllCommenstOnBeer = (req ,res ) =>{
+
+    getAllCommentsOnBeer = (req ,res ) =>{
         commentDao.findAllCommentsOnBeerId(req.params['beerId']).then(result=>{
             res.send(result)
         })
@@ -46,4 +40,12 @@ module.exports = app => {
             res.send(result)
         })
     };
+
+    app.get('/api/beer/:beerId/comment' , getAllCommentsOnBeer);
+    app.post('/api/user/:userId/beer/:beerId/comment' , addcomment);
+    app.put('/api/beer/:beerId/comment' , updateComment);
+    app.delete('/api/beer/:beerId/comment/:commentId' , deleteComment);
+    app.get('/api/user/:userId/beer/:beerId/comment' , getCommentOnBeerByUserId);
+    app.get('/api/user/:userId/comment' , getAllCommentsByUserId);
+    app.get('/api/comment' , getAllComments);
 };

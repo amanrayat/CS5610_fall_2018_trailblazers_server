@@ -19,8 +19,11 @@ app.use(session({
     },
     rolling: true
 }));
+
+require('./services/beer.service.server')(app);
 require('./services/user.service.server')(app);
 require('./services/userFollowers.service.server')(app);
+require('./services/comment.service.server')(app);
 
 //Listen to requests at port 3000
 app.listen(process.env.PORT || 3000);
