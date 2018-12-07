@@ -10,6 +10,6 @@ const userSchema = mongoose.Schema({
     phoneNo : Number,
     type : {type: String , enum : ['CUSTOMER' , 'EVENTPLANNER' , 'ADMIN']},
     admin : {type: Number, ref: 'UserModel'}
-}, {collection: 'user'});
+}, {collection: 'users'});
 
 module.exports = userSchema;

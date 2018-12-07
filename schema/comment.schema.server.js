@@ -6,6 +6,6 @@ const commentSchema = mongoose.Schema({
     beerId : {type:  String, ref : 'BeerModel'},
     time : { type : Date, default: Date.now },
     comment : String
-},{collection: 'comment'});
+},{collection: 'comments'});
 
 module.exports = commentSchema;
