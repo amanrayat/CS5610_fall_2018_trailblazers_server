@@ -21,7 +21,7 @@ findAllUsers = () => userModel.find().populate('customer.cId').exec();
 findUserById = (id) => userModel.find({$and: [{_id: id}]});
 deleteUserById = (id) => userModel.remove({_id: id});
 updateUserById = (uid, user) => userModel.update({_id: uid}, {$set: user});
-findUserByUsername = username => userModel.find({name : username});
+findUserByUsername = username => userModel.find({username : username});
 
 findUserByCredentials = (emailId, password) => userModel.find({email: emailId, password: password});
 

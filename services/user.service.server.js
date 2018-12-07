@@ -52,9 +52,17 @@ module.exports = app => {
     };
 
     getUser = (req, res) => {
-        return userDao.findAllUsers().then(result => {
-            res.send(result)
-        })
+        if(req.query.name){
+            return userDao.findUserByUsername(req.query.name).then(result => {
+                res.send(result)
+            })
+        }
+        else{
+            return userDao.findAllUsers().then(result => {
+                res.send(result)
+            })
+        }
+
     };
 
     deleteUserById = (req, res) =>
@@ -68,11 +76,18 @@ module.exports = app => {
         })
     };
 
+    getUserById =(req , res ) =>{
+        return userDao.findUserById(req.params['userId']).then(result=>{
+            res.send(result)
+        })
+    };
+
     app.post('/api/register', register);
     app.get('/api/profile', profile);
     app.post('/api/login', login);
     app.get('/api/customer', getCustomer);
     app.get('/api/user', getUser);
+    app.get('/api/user/:userId', getUserById);
     app.get('/api/customer/:cid', getCustomerById);
     app.delete('/api/user/:userId', deleteUserById);
     app.put('/api/user/:userId', updateUserById);
