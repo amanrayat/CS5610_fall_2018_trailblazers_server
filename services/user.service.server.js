@@ -76,5 +76,5 @@ module.exports = app => {
     app.get('/api/customer/:cid', getCustomerById);
     app.delete('/api/user/:userId', deleteUserById);
     app.put('/api/user/:userId', updateUserById);
-    app.post('/api/customer', createUser);
+    app.post('/api/user', createUser);
 };

@@ -1,7 +1,4 @@
 const mongoose = require('mongoose');
-const CustomerSchema  = require('./customer.schema.server');
-const PlannerSchema = require('./eventPlanner.schema.servver');
-const AdminSchema = require('./admin.schema.server');
 
 const userSchema = mongoose.Schema({
     _id: Number,
@@ -12,7 +9,7 @@ const userSchema = mongoose.Schema({
     email : String,
     phoneNo : Number,
     type : {type: String , enum : ['CUSTOMER' , 'EVENTPLANNER' , 'ADMIN']},
-    admin : {type: Number, ref: 'user'}
+    admin : {type: Number, ref: 'UserModel'}
 }, {collection: 'user'});
 
 module.exports = userSchema;
