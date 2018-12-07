@@ -23,7 +23,6 @@ module.exports = app => {
     register = (req, res) => {
 
         return userDao.findDuplicateUser(req.body.email, req.body.username, req.body.phoneNo).then(result => {
-
             if (result && result.length > 0) return null;
 
             return userDao.createUser(req.body);
@@ -82,11 +81,18 @@ module.exports = app => {
         })
     };
 
+    getUsersByAdmin = (req, res) => {
+        return userDao.findUsersByAdmin(req.params['adminId']).then(result => {
+            res.send(result)
+        })
+    };
+
     app.post('/api/register', register);
     app.get('/api/profile', profile);
     app.post('/api/login', login);
     app.get('/api/customer', getCustomer);
     app.get('/api/user', getUser);
+    app.get('/api/admin/:adminId/users', getUsersByAdmin);
     app.get('/api/user/:userId', getUserById);
     app.get('/api/customer/:cid', getCustomerById);
     app.delete('/api/user/:userId', deleteUserById);
