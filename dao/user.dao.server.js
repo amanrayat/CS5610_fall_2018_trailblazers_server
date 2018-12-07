@@ -2,20 +2,27 @@ const userModel = require('../model/user.model.server');
 
 createUser = user => {
     if(user.type!=='ADMIN'){
-        let adminIds = [];
-        return findAllAdmins().then((result)=>{
-            result.map(admin=>{
-                adminIds.push(admin._id)
+        if(user.admin){
+            userModel.create(user);
+        }
+        else{
+            let adminIds = [];
+            return findAllAdmins().then((result)=>{
+                result.map(admin=>{
+                    adminIds.push(admin._id)
+                });
+                user.admin = adminIds[Math.floor(Math.random() * adminIds.length)];
+                return userModel.create(user);
             });
-            user.admin = adminIds[Math.floor(Math.random() * adminIds.length)];
-            return userModel.create(user);
-        });
+        }
     }
     else{
         return userModel.create(user);
     }
 
 };
+
+
 findAllAdmins = () =>userModel.find({type : 'ADMIN'});
 findAllUsers = () => userModel.find().populate('customer.cId').exec();
 findUserById = (id) => userModel.find({$and: [{_id: id}]});

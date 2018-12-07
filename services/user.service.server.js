@@ -23,7 +23,6 @@ module.exports = app => {
     register = (req, res) => {
 
         return userDao.findDuplicateUser(req.body.email, req.body.username, req.body.phoneNo).then(result => {
-
             if (result && result.length > 0) return null;
 
             return userDao.createUser(req.body);
