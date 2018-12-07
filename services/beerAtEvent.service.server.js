@@ -27,7 +27,7 @@ module.exports = app => {
 
     app.get('/api/beeratevent' , getAllBeersAtEvent);
     app.delete('/api/beeratevent/:id' , deleteBeerAtEventById);
-    app.get('/api/beeratevent/:bId' , getAllBeersAtEventByBeertId);
-    app.get('/api/beeratevent/:eId' , getAllBeersAtEventByEventId);
-    
+    app.get('/api/beeratevent/beer/:bId' , getAllBeersAtEventByBeertId);
+    app.get('/api/beeratevent/event/:eId' , getAllBeersAtEventByEventId);
+
 };
