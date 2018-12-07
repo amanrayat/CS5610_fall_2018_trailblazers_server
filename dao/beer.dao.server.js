@@ -7,8 +7,14 @@ createBeer = (beer) => beerModel.findById(beer._id).then(result=>{
         return []
 });
 findAllBeers = () => beerModel.find();
+deleteBeerById = id => beerModel.remove({_id : id});
+
+createBeer2 = (beer) => beerModel.findOneAndUpdate({_id : beer._id}, beer, {upsert : true , new: true, runValidators: true});
 
 module.exports = {
     createBeer,
-    findAllBeers
+    findAllBeers,
+    createBeer2,
+    deleteBeerById
+
 };

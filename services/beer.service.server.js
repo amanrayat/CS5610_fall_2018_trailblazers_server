@@ -13,6 +13,13 @@ module.exports = app => {
         })
     };
 
+    deleteBeerById = (req ,res ) =>{
+        beerDao.deleteBeerById(req.params['beerId']).then(result=>{
+            res.send(result)
+        })
+    };
+
     app.post('/api/beer' , addBeer);
     app.get('/api/beer' , getAllBeer);
+    app.delete('/api/beer/:beerId' , deleteBeerById);
 };
