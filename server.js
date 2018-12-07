@@ -5,7 +5,6 @@ const app        = express();
 const idleTimeoutSeconds = 30*60*1000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
-
 //Database Connection
 require ('./db/database')();
 
@@ -35,6 +34,9 @@ require('./services/beer.service.server')(app);
 require('./services/user.service.server')(app);
 require('./services/userFollowers.service.server')(app);
 require('./services/comment.service.server')(app);
+require('./services/brewery.service.server')(app);
+require('./services/event.service.server')(app);
+require('./services/beerAtEvent.service.server')(app);
 
-//Listen to requests at port 3000
+//Listen to requests at port 4000
 app.listen(4000);

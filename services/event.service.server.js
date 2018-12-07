@@ -33,11 +33,17 @@ module.exports = app => {
             res.send(result)
         })
     };
+    createEvent = (req,res)=>{
+        eventDao.addEvent(req.params['epId'] , req.body).then(result=>{
+            res.send(result)
+        })
+    };
 
     app.get('/api/event' , getAllEvents);
     app.get('/api/event/:eId' , getEventById);
     app.delete('/api/event/:eId' , deleteEventById);
     app.put('/api/event/:eId' , updateEventById);
     app.get('/api/eventplanner/:epId/event' , getEventsByPlannerId);
+    app.post('/api/eventplanner/:epId/event' , createEvent);
     app.get('/api/brewery/:brId/event' , getEventsByPlannerId);
 };

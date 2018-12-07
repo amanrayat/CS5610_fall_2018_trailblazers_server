@@ -8,14 +8,14 @@ const beerSchema = mongoose.Schema({
     createDate : String,
     updateDate : String,
     breweries : [String],
-    available : Boolean,
+    available : [],
     glass:String,
     servingTemperatureDisplay : String,
     isOrganic : Boolean,
-    abv:Number,
-    ibu : Number,
-    og : Number,
-    srm : Number
+    abv:String,
+    ibu : String,
+    og : String,
+    srm : String
 
 } , {collection : 'beers'});
 
