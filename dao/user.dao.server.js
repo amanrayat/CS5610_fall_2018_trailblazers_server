@@ -22,6 +22,10 @@ createUser = user => {
 
 };
 
+findUsersByAdmin = (id) => {
+    return userModel.find({admin: id})
+};
+
 
 findAllAdmins = () =>userModel.find({type : 'ADMIN'});
 findAllUsers = () => userModel.find().populate('customer.cId').exec();
@@ -56,6 +60,7 @@ module.exports = {
     createUser,
     findUserById,
     findAllAdmins,
+    findUsersByAdmin,
     findUserByCredentials,
     findAllCustomers,
     findCustomerById,
