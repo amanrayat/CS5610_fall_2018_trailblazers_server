@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const likesSchema = mongoose.Schema({
-    _id : Number,
-    userId : {type : Number , ref : 'UserModel'},
-    beerId : {type:  Number, ref : 'BeerModel'},
+    _id : mongoose.Schema.Types.ObjectId,
+    userId : {type : mongoose.Schema.Types.ObjectId , ref : 'UserModel'},
+    beerId : {type:  mongoose.Schema.Types.ObjectId, ref : 'BeerModel'},
     time : { type : Date, default: Date.now },
     like : Boolean ,
     rating : Number

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
-    _id: Number,
+    // _id : mongoose.Schema.Types.ObjectId,
     username: String,
     password: String,
     firstName: String,
@@ -9,7 +9,7 @@ const userSchema = mongoose.Schema({
     email : String,
     phoneNo : Number,
     type : {type: String , enum : ['CUSTOMER' , 'EVENTPLANNER' , 'ADMIN']},
-    admin : {type: Number, ref: 'UserModel'}
+    admin : {type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'}
 }, {collection: 'user'});
 
 module.exports = userSchema;
