@@ -17,6 +17,6 @@ const beerSchema = mongoose.Schema({
     og : Number,
     srm : Number
 
-} , {collection : 'beer'});
+} , {collection : 'beers'});
 
 module.exports = beerSchema;

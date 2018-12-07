@@ -9,6 +9,7 @@ const userSchema = mongoose.Schema({
     email : String,
     phoneNo : Number,
     type : {type: String , enum : ['CUSTOMER' , 'EVENTPLANNER' , 'ADMIN']},
+
     admin : {type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'}
 }, {collection: 'user'});
 
