@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 
 const eventSchema = mongoose.Schema({
-    _id : Number,
-    eventPlannerId : {type : Number , ref : 'UserModel'},
+    eventPlannerId : {type : mongoose.Schema.Types.ObjectId , ref : 'UserModel'},
     breweryId : {type:  String, ref : 'BreweryModel'},
     dateOfEvent : Date,
     timeOfEvent : Number,
