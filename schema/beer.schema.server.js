@@ -7,7 +7,7 @@ const beerSchema = mongoose.Schema({
     description : String,
     createDate : String,
     updateDate : String,
-    breweries : String,
+    breweries : [String],
     available : Boolean,
     glass:String,
     servingTemperatureDisplay : String,
