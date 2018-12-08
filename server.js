@@ -29,6 +29,7 @@ app.use(function(req, res, next) {
     next();
 });
 
+app.get('/' , (req , res)=> res.send("The app is up"));
 require('./services/likes.service.server')(app);
 require('./services/beer.service.server')(app);
 require('./services/user.service.server')(app);
