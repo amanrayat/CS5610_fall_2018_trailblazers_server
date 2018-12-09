@@ -7,6 +7,12 @@ findAllMyLikes = id => likesModel.find({userId : id}).populate('beerId').exec();
 findAllLikesOnBeerId = id => likesModel.find({beerId : id}).populate('userId').exec();
 findAllMyLikeOnBeerId =(uId ,bId) => likesModel.find({userId : uId , beerId : bId}).populate('userId beerId').exec();
 
+findDuplicateLike = (userId, beerId) => likesModel.find({
+    $and: [
+        {'userId': userId},
+        {'beerId': beerId}]
+});
+
 likesOnBeer = (userId , beerId ,likes) =>
     likesModel.create({userId : userId , beerId : beerId , like : likes.like , rating : likes.rating});
 
@@ -32,6 +38,7 @@ module.exports = {
     findAllLikes,
     findAllMyLikes,
     findAllLikesOnBeerId,
+    findDuplicateLike,
     likesOnBeer,
     removeLike,
     findAllMyLikeOnBeerId,
