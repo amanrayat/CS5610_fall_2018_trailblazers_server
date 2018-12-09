@@ -18,19 +18,7 @@ addEvent = (epId  , event)=>{
         dateOfEvent : event.dateOfEvent?event.dateOfEvent: Date.now(),
         timeOfEvent : event.timeOfEvent,
     };
-    return eventModel.create(evt).then(result=>{
-        let beers = [];
-        const brewerUrl = 'https://sandbox-api.brewerydb.com/v2/brewery/'+event.breweryId+'/beers?key=21ed24bf7af4b64476155e7902e27d5e'
-        return axios.get(brewerUrl).then(result1=>{
-             result1.data.data.map(beer=>{
-                beers.push(beer)
-            });
-
-            beers = JSON.parse(JSON.stringify(beers).split('"id":').join('"_id":'));
-            beers.map(beer=>beerDao.createBeer(beer));
-            beers.map(beer=>beerAtEventDao.createBeerAtEvent(beer._id , result._id))
-        })
-    })
+    return eventModel.create(evt);
 };
 
 module.exports = {

@@ -5,7 +5,7 @@ const eventSchema = mongoose.Schema({
     eventPlannerId : {type : mongoose.Schema.Types.ObjectId , ref : 'UserModel'},
     breweryId : {type:  String, ref : 'BreweryModel'},
     dateOfEvent : Date,
-    timeOfEvent : Number,
+    timeOfEvent : String,
 },{collection: 'events'});
 
 module.exports = eventSchema;
