@@ -34,7 +34,7 @@ deleteUserById = (id) => userModel.remove({_id: id});
 updateUserById = (uid, user) => userModel.update({_id: uid}, {$set: user});
 findUserByUsername = username => userModel.find({username : username});
 
-findUserByCredentials = (emailId, password) => userModel.find({email: emailId, password: password});
+findUserByCredentials = (emailId, password, role) => userModel.find({email: emailId, password: password, type: role});
 
 findDuplicateUser = (emailId, username, phoneNo) => userModel.find({
     $or: [
