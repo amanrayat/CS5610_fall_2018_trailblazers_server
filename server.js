@@ -11,19 +11,16 @@ require ('./db/database')();
 
 app.use(session({
     resave: false,
-    // httpOnly : false,
     saveUninitialized: true,
     secret: 'any string',
     cookie: {
-        secure: false,
-        httpOnly: false,
         maxAge: idleTimeoutSeconds * 1000,
     },
     rolling: true
 }));
 
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://lit-earth-30010.herokuapp.com");
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
     res.header("Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Credentials", true);
@@ -43,5 +40,5 @@ require('./services/event.service.server')(app);
 require('./services/beerAtEvent.service.server')(app);
 
 //Listen to requests at port 4000
-app.listen( process.env.PORT || 4000);
-// app.listen(  4000);
+// app.listen( process.env.PORT || 4000);
+app.listen(  4000);
