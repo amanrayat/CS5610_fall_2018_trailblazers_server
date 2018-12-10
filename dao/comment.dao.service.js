@@ -12,7 +12,7 @@ commentOnBeer = (userId , beerId ,comment) =>
 
 removeComment = (cId) => commentModel.remove({_id : cId});
 updateComment = (cId , newComment) => commentModel.update({_id: cId}, {$set: newComment});
-recentComments = () => commentModel.find({}).sort('-time').exec();
+AllComments = () => commentModel.find({}).populate('userId').exec();
 recentCommentByFollowing = (id) =>{
     return commentModel.find().populate('userId').exec().then(result=>{
         return userFollowerDao.findAllMyFollowingId(id).then(result2=>{
@@ -36,6 +36,6 @@ module.exports = {
     removeComment,
     findAllMyCommentOnBeerId,
     updateComment,
-    recentComments,
+    AllComments,
     recentCommentByFollowing
 };

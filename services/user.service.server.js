@@ -77,7 +77,10 @@ module.exports = app => {
 
     updateUserById = (req, res) => {
         return userDao.updateUserById(req.params['userId'], req.body).then(result => {
-            res.send(result)
+            userDao.findUserById(req.params['userId']).then(res_1 => {
+                req.session['currentUser'] = res_1;
+                res.send(result)
+            });
         })
     };
 

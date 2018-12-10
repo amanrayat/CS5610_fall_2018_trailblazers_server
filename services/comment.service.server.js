@@ -41,9 +41,9 @@ module.exports = app => {
         })
     };
 
-    recentComments = (req,res) =>{
-        commentDao.recentComments().then(result=>{
-            res.send(result.slice(0,6))
+    allComments = (req,res) =>{
+        commentDao.AllComments().then(result=>{
+            res.send(result)
         })
     };
 
@@ -61,5 +61,5 @@ module.exports = app => {
     app.get('/api/user/:userId/comment' , getAllCommentsByUserId);
     app.get('/api/user/:userId/recentcomment' , getMyRecentComment);
     app.get('/api/comment' , getAllComments);
-    app.get('/api/recentcomment' , recentComments);
+    app.get('/api/allComments' , allComments);
 };
