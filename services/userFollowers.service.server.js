@@ -20,7 +20,7 @@ module.exports = app =>{
         })
     };
     followUser =( req ,res ) =>{
-        followerDao.followUser(req.params['userId'] , req.params['followerId']).then((result )=>{
+        return followerDao.followUser(req.params['userId'] , req.params['followerId']).then((result )=>{
             res.send(result)
         })
     };

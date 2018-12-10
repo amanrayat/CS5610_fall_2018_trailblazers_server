@@ -29,8 +29,11 @@ module.exports = app => {
         })
     };
     addlike = (req , res ) =>{
-        likeDao.likesOnBeer(req.params['userId'],req.params['beerId'] , req.body).then(result=>{
-            res.send(result)
+        return likeDao.findDuplicateLike(req.params['userId'],req.params['beerId']).then(result => {
+            if (result && result.length > 0) return null;
+            return likeDao.likesOnBeer(req.params['userId'],req.params['beerId'] , req.body).then(result=>{
+                res.send(result)
+            })
         })
     };
 

@@ -14,6 +14,12 @@ module.exports = app => {
         });
     };
 
+    function logout(req, res) {
+        req.session.destroy();
+        res.send(200);
+    }
+
+
     getCustomerById = (req, res) => {
         return userDao.findCustomerById(req.params['cid']).then(result => {
             res.send(result)
@@ -24,8 +30,8 @@ module.exports = app => {
 
         return userDao.findDuplicateUser(req.body.email, req.body.username, req.body.phoneNo).then(result => {
             if (result && result.length > 0) return null;
-
-            return userDao.createUser(req.body);
+            userDao.createUser(req.body);
+            return 'Success';
 
         }).then(user => {
             if (user) {
@@ -40,7 +46,7 @@ module.exports = app => {
     profile = (req, res) => res.send(req.session['currentUser']);
 
     login = (req, res) => {
-        return userDao.findUserByCredentials(req.body.email, req.body.password).then(result => {
+        return userDao.findUserByCredentials(req.body.email, req.body.password, req.body.role).then(result => {
             if (result && result.length > 0) {
                 req.session['currentUser'] = result;
                 res.send(result);
@@ -71,7 +77,10 @@ module.exports = app => {
 
     updateUserById = (req, res) => {
         return userDao.updateUserById(req.params['userId'], req.body).then(result => {
-            res.send(result)
+            userDao.findUserById(req.params['userId']).then(res_1 => {
+                req.session['currentUser'] = res_1;
+                res.send(result)
+            });
         })
     };
 
@@ -90,6 +99,7 @@ module.exports = app => {
     app.post('/api/register', register);
     app.get('/api/profile', profile);
     app.post('/api/login', login);
+    app.post('/api/logout', logout);
     app.get('/api/customer', getCustomer);
     app.get('/api/user', getUser);
     app.get('/api/admin/:adminId/users', getUsersByAdmin);

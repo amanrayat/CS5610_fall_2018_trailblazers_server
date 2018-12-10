@@ -45,5 +45,6 @@ module.exports = app => {
     app.put('/api/event/:eId' , updateEventById);
     app.get('/api/eventplanner/:epId/event' , getEventsByPlannerId);
     app.post('/api/eventplanner/:epId/event' , createEvent);
-    app.get('/api/brewery/:brId/event' , getEventsByPlannerId);
+    app.get('/api/eventplanner/:epId/event' , getEventsByPlannerId);
+    app.get('/api/brewery/:brId/event' , getEventsByBreweryId);
 };
