@@ -4,8 +4,9 @@ findAllFollowers = () => userFollowerModel.find().populate('userId followerId').
 findAllMyFollowers = id =>userFollowerModel.find({userId : id}).populate('followerId').exec();
 findAllMyFollowing = id =>userFollowerModel.find({followerId : id}).populate('userId').exec();
 findAllMyFollowingId = id =>userFollowerModel.find({userId : id},{followerId : 1});
-followUser = (userId , followerId) =>
-    userFollowerModel.create({userId : userId , followerId : followerId});
+followUser = (userId , followerId) =>{
+    return userFollowerModel.create({userId : userId , followerId : followerId})
+}
 RemoveFollowUser = (userId , followerId) =>
     userFollowerModel.remove({userId : userId , followerId :followerId});
 
