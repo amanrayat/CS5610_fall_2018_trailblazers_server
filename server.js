@@ -11,10 +11,12 @@ require ('./db/database')();
 
 app.use(session({
     resave: false,
-    httpOnly : false,
+    // httpOnly : false,
     saveUninitialized: true,
     secret: 'any string',
     cookie: {
+        secure: false,
+        httpOnly: false,
         maxAge: idleTimeoutSeconds * 1000,
     },
     rolling: true
