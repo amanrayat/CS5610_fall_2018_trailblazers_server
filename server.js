@@ -11,6 +11,7 @@ require ('./db/database')();
 
 app.use(session({
     resave: false,
+    httpOnly : false,
     saveUninitialized: true,
     secret: 'any string',
     cookie: {
