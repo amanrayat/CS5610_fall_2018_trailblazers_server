@@ -15,6 +15,8 @@ app.use(session({
     saveUninitialized: true,
     secret: 'any string',
     cookie: {
+        secure : false,
+        httpOnly : false,
         maxAge: idleTimeoutSeconds * 1000,
     },
     rolling: true
