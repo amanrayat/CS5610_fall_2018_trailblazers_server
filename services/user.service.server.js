@@ -51,8 +51,8 @@ module.exports = app => {
     login = (req, res) => {
         return userDao.findUserByCredentials(req.body.email, req.body.password, req.body.role).then(result => {
             if (result && result.length > 0) {
-                console.log("the session is " , req.session);
                 req.session['currentUser'] = result;
+                console.log("the session is " , req.session);
                 res.send(result);
             } else {
                 res.send(null);
