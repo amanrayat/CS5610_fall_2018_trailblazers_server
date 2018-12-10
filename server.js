@@ -29,6 +29,7 @@ app.use(function(req, res, next) {
     next();
 });
 
+app.get('/' , (req , res)=> res.send("The app is up"));
 require('./services/likes.service.server')(app);
 require('./services/beer.service.server')(app);
 require('./services/user.service.server')(app);
@@ -39,4 +40,4 @@ require('./services/event.service.server')(app);
 require('./services/beerAtEvent.service.server')(app);
 
 //Listen to requests at port 4000
-app.listen(4000 || process.env.PORT);
+app.listen( process.env.PORT || 4000);
