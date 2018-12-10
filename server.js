@@ -41,3 +41,4 @@ require('./services/beerAtEvent.service.server')(app);
 
 //Listen to requests at port 4000
 app.listen( process.env.PORT || 4000);
+// app.listen(  4000);
