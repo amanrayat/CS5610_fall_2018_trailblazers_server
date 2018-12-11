@@ -36,7 +36,7 @@ module.exports = app => {
     };
 
     updateComment = (req , res ) =>{
-        commentDao.updateComment(req.params['beerId'] , req.body).then(result=>{
+        commentDao.updateComment(req.params['cId'] , req.body).then(result=>{
             res.send(result)
         })
     };
@@ -51,11 +51,11 @@ module.exports = app => {
         commentDao.recentCommentByFollowing(req.params['userId']).then(result=>{
             res.send(result)
         })
-    }
+    };
 
     app.get('/api/beer/:beerId/comment' , getAllCommentsOnBeer);
     app.post('/api/user/:userId/beer/:beerId/comment' , addcomment);
-    app.put('/api/beer/:beerId/comment' , updateComment);
+    app.put('/api/beer/:beerId/comment/:cId' , updateComment);
     app.delete('/api/beer/:beerId/comment/:commentId' , deleteComment);
     app.get('/api/user/:userId/beer/:beerId/comment' , getCommentOnBeerByUserId);
     app.get('/api/user/:userId/comment' , getAllCommentsByUserId);
