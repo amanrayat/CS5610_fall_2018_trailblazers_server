@@ -31,6 +31,7 @@ module.exports = app =>{
         })
     };
 
+    //Update is not required, Since updating a follow status is just Deleting it.
     app.get('/api/follow' , findAllFollowers);
     app.post('/api/user/:userId/follow/:followerId' , followUser);
     app.delete('/api/user/:userId/unfollow/:followerId' , RemoveFollowUser);

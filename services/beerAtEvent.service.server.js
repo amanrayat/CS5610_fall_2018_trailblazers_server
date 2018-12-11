@@ -25,6 +25,9 @@ module.exports = app => {
         })
     };
 
+    //This service is not used by the user, So the Update , Create is not required
+    //We populate this model on making an event.
+
     app.get('/api/beeratevent' , getAllBeersAtEvent);
     app.delete('/api/beeratevent/:id' , deleteBeerAtEventById);
     app.get('/api/beeratevent/beer/:bId' , getAllBeersAtEventByBeertId);

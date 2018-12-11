@@ -19,7 +19,14 @@ module.exports = app => {
         })
     };
 
+    updateBeerById =(req , res ) => {
+        beerDao.updateBeerById(req.params['beerId'], req.body).then(result => {
+            res.send(result)
+        })
+    };
+
     app.post('/api/beer' , addBeer);
     app.get('/api/beer' , getAllBeer);
     app.delete('/api/beer/:beerId' , deleteBeerById);
+    app.put('/api/beer/:beerId' , updateBeerById);
 };
